@@ -41,7 +41,6 @@ class PackagesServiceProvider extends ServiceProvider
         return [];
     }
 
-
     /* ------------------------------------------------------------------------------------------------
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
@@ -52,5 +51,13 @@ class PackagesServiceProvider extends ServiceProvider
     private function registerLaravelTrackerPackage()
     {
         $this->app->register(LaravelTrackerServiceProvider::class);
+
+        /** @var \Illuminate\Contracts\Config\Repository  $config */
+        $config = $this->app['config'];
+
+        $config->set('laravel-tracker.database', $config->get('arcanesoft.tracker.database'));
+        $config->set('laravel-tracker.models',   $config->get('arcanesoft.tracker.models'));
+        $config->set('laravel-tracker.tracking', $config->get('arcanesoft.tracker.tracking'));
+        $config->set('laravel-tracker.routes',   $config->get('arcanesoft.tracker.routes'));
     }
 }
