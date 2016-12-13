@@ -39,6 +39,6 @@ abstract class Controller extends BaseController
     {
         parent::__construct();
 
-        $this->addBreadcrumbRoute('Tracker', 'tracker::foundation.index');
+        $this->addBreadcrumbRoute('Tracker', 'tracker::foundation.stats.index');
     }
 }

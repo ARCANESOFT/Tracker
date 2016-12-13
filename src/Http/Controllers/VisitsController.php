@@ -32,7 +32,8 @@ class VisitsController extends Controller
     public function index()
     {
         $this->setTitle('Visits list - Tracker');
-        $sessions = Session::with(['user', 'device', 'agent', 'geoip', 'referer', 'cookie', 'language'])
+
+        $sessions = Session::with(['user', 'device', 'agent', 'geoip', 'referer', 'cookie', 'language', 'activities'])
             ->paginate(50);
 
         return $this->view('foundation.visits.index', compact('sessions'));

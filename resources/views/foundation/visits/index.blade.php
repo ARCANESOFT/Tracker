@@ -18,7 +18,7 @@
                             <th>Device</th>
                             <th>Browser</th>
                             <th>Referer</th>
-                            <th>Page Views</th>
+                            <th class="text-center">Page Views</th>
                             <th>Last activity</th>
                         </tr>
                     </thead>
@@ -27,7 +27,9 @@
                         @foreach ($sessions as $session)
                         <tr>
                             <td>
-                                {{ $session->client_ip }}
+                                <span class="label label-inverse">
+                                    {{ $session->client_ip }}
+                                </span>
                             </td>
                             <td>
                                 {{ $session->location_name }}
@@ -36,7 +38,7 @@
                                 {{ $session->username }}
                             </td>
                             <td>
-                                {{ $session->device->kind }} [{{ $session->device->platform }}]
+                                {{ $session->device->kind_name }} [{{ $session->device->platform }}]
                             </td>
                             <td>
                                 {{ $session->agent->browser }} ({{ $session->agent->browser_version }})
@@ -44,11 +46,13 @@
                             <td>
                                 {{ $session->referer->host }}
                             </td>
-                            <td>
-                                {{ $session->activities->count() }}
+                            <td class="text-center">
+                                <span class="label label-info">
+                                    {{ $session->activities->count() }}
+                                </span>
                             </td>
                             <td>
-
+                                {{ $session->updated_at->diffForHumans() }}
                             </td>
                         </tr>
                         @endforeach

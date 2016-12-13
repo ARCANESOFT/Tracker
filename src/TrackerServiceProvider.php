@@ -50,6 +50,7 @@ class TrackerServiceProvider extends PackageServiceProvider
         $this->app->register(CoreServiceProvider::class);
         $this->app->register(Providers\PackagesServiceProvider::class);
         $this->app->register(Providers\AuthorizationServiceProvider::class);
+        $this->app->register(Providers\ComposerServiceProvider::class);
 
         if ($this->app->runningInConsole()) {
             $this->app->register(Providers\CommandServiceProvider::class);

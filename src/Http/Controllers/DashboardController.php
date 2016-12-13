@@ -1,4 +1,5 @@
 <?php namespace Arcanesoft\Tracker\Http\Controllers;
+use Arcanedev\LaravelTracker\Models\SessionActivity;
 
 /**
  * Class     DashboardController
@@ -19,7 +20,7 @@ class DashboardController extends Controller
     {
         parent::__construct();
 
-        $this->setCurrentPage('tracker');
+        $this->setCurrentPage('tracker-dashboard');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -30,6 +31,8 @@ class DashboardController extends Controller
     {
         $this->setTitle('Tracker');
 
-        return $this->view('foundation.dashboard');
+        $activities = SessionActivity::all()->toArray();
+
+        return $this->view('foundation.dashboard', compact('activities'));
     }
 }

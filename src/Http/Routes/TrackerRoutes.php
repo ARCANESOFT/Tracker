@@ -22,7 +22,9 @@ class TrackerRoutes extends RouteRegister
      */
     public function map(Registrar $router)
     {
-        $this->get('/', 'DashboardController@index')->name('index'); // tracker::foundation.index
+        $this->group(['prefix' => 'stats', 'as' => 'stats.'], function () {
+            $this->get('/', 'DashboardController@index')->name('index'); // tracker::foundation.stats.index
+        });
 
         $this->group(['prefix' => 'visits', 'as' => 'visits.'], function () {
             $this->get('/', 'VisitsController@index')->name('index'); // tracker::foundation.visits.index
