@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
 use Arcanesoft\Tracker\Models\Device;
+use Arcanesoft\Tracker\Models\Session;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Carbon\Carbon;
@@ -39,12 +40,7 @@ class DevicesRatioComposer extends AbstractViewComposer
          */
         extract(DateRange::getCurrentMonthDaysRange());
 
-        $devices = $this->getDevicesFromSessions($start, $end);
-
-        $view->with('computerDevices',  $this->getComputersCount($devices));
-        $view->with('tabletDevices',    $this->getTabletsCount($devices));
-        $view->with('phoneDevices',     $this->getPhonesCount($devices));
-        $view->with('unavailableDevices', $this->getUnavailableCount($devices));
+        $view->with('devicesRatio',  $this->getDevicesFromSessions($start, $end));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -62,11 +58,18 @@ class DevicesRatioComposer extends AbstractViewComposer
     protected function getDevicesFromSessions(Carbon $start, Carbon $end)
     {
         return $this->getCachedVisitors()
-            ->filter(function ($session) use ($start, $end) {
-                return $session->updated_at->between($start, $end);
+            ->filter(function (Session $session) use ($start, $end) {
+                return $session->updated_at->between($start, $end) && ! is_null($session->device);
             })
-            ->transform(function ($session) {
+            ->transform(function (Session $session) {
                 return $session->device;
+            })
+            ->groupBy('kind')
+            ->transform(function ($items, $key) {
+                return [
+                    'kind'  => trans("tracker::device.kinds.$key"),
+                    'count' => $items->count(),
+                ];
             });
     }
 

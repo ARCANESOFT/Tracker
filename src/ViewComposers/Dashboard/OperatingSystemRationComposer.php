@@ -6,18 +6,18 @@ use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Illuminate\Contracts\View\View;
 
 /**
- * Class     AuthenticatedVisitorsRatioComposer
+ * Class     OperatingSystemRationComposer
  *
  * @package  Arcanesoft\Tracker\ViewComposers\Dashboard
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
+class OperatingSystemRationComposer extends AbstractViewComposer
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.authenticated-visitors-ratio-chart';
+    const VIEW = 'tracker::foundation._composers.dashboard.os-ratio-chart';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -37,9 +37,7 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
          */
         extract(DateRange::getCurrentMonthDaysRange());
 
-        $visitors = $this->filterVisitors($start, $end);
-
-        $view->with('authenticatedVisitorsRatio', $this->getAuthenticatedVisitorsRatio($visitors));
+        $view->with('operatingSystemRatio', $this->getOperatingSystemsCountFromSessions($start, $end));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -47,43 +45,29 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the authenticated visitors ratio.
+     * Get the operating systems count from sessions.
      *
-     * @param  \Illuminate\Support\Collection  $visitors
+     * @param  \Carbon\Carbon                  $start
+     * @param  \Carbon\Carbon                  $end
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection  $range
      */
-    private function getAuthenticatedVisitorsRatio($visitors)
+    private function getOperatingSystemsCountFromSessions($start, $end)
     {
-        $ratio = [
-            'authenticated' => 0,
-            'guest'         => 0,
-        ];
-
-        foreach ($visitors as $visitor) {
-            $visitor->hasUser() ? $ratio['authenticated'] += 1 : $ratio['guest'] += 1;
-        }
-
-        return collect($ratio)->transform(function ($count, $key) {
-            return [
-                'name'  => trans("tracker::users.$key"),
-                'count' => $count,
-            ];
-        });
-    }
-
-    /**
-     * Get the filtered visitors.
-     *
-     * @param  \Carbon\Carbon  $start
-     * @param  \Carbon\Carbon  $end
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    private function filterVisitors($start, $end)
-    {
-        return $this->getCachedVisitors()->filter(function (Session $session) use ($start, $end) {
-            return $session->updated_at->between($start, $end);
-        });
+        return $this->getCachedVisitors()
+            ->filter(function (Session $visitor) use ($start, $end) {
+                return $visitor->updated_at->between($start, $end) && ! is_null($visitor->device);
+            })
+            ->transform(function (Session $visitor) {
+                return $visitor->device;
+            })
+            ->groupBy('platform')
+            ->transform(function ($items, $platform) {
+                return [
+                    'platform' => $platform,
+                    'count'    => $items->count(),
+                ];
+            })
+            ->sortByDesc('count');
     }
 }

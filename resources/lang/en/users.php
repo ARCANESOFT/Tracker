@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'guest' => '(Guest)',
+    'authenticated' => 'Authenticated',
+    'guest'         => 'Guest',
 ];

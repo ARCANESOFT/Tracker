@@ -14,16 +14,10 @@
         new Chart($('canvas#authenticatedVisitorsChart'), {
             type: 'pie',
             data: {
-                labels: [
-                    "Authenticated",
-                    "Guest"
-                ],
+                labels: {!! $authenticatedVisitorsRatio->pluck('name') !!},
                 datasets: [
                     {
-                        data: [
-                            {{ $authenticatedVisitors->count() }},
-                            {{ $guestVisitors->count() }}
-                        ],
+                        data: {!! $authenticatedVisitorsRatio->pluck('count') !!},
                         backgroundColor: [
                             "#00A65A",
                             "#36A2EB"

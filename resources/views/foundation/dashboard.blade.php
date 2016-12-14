@@ -6,13 +6,20 @@
     @include(Arcanesoft\Tracker\ViewComposers\Dashboard\LatestThirtyDaysVisitsAndVisitorsComposer::VIEW)
 
     <div class="row">
-        <div class="col-md-4">
-            @include(Arcanesoft\Tracker\ViewComposers\Dashboard\AuthenticatedVisitorsRatioComposer::VIEW)
-        </div>
-        <div class="col-md-4">
+        <div class="col-sm-6 col-md-4">
             @include(Arcanesoft\Tracker\ViewComposers\Dashboard\DevicesRatioComposer::VIEW)
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-sm-6 col-md-4">
+            @include(Arcanesoft\Tracker\ViewComposers\Dashboard\BrowsersRatioComposer::VIEW)
+        </div>
+        <div class="clearfix visible-sm"></div>
+        <div class="col-sm-6 col-md-4">
+            @include(Arcanesoft\Tracker\ViewComposers\Dashboard\OperatingSystemRationComposer::VIEW)
+        </div>
+        <div class="clearfix visible-md visible-lg"></div>
+        <div class="col-sm-6 col-md-4">
+            @include(Arcanesoft\Tracker\ViewComposers\Dashboard\AuthenticatedVisitorsRatioComposer::VIEW)
+        </div>
     </div>
 @endsection
 

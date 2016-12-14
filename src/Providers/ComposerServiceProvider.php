@@ -54,5 +54,15 @@ class ComposerServiceProvider extends ServiceProvider
             Dashboard\DevicesRatioComposer::VIEW,
             Dashboard\DevicesRatioComposer::class
         );
+
+        view()->composer(
+            Dashboard\BrowsersRatioComposer::VIEW,
+            Dashboard\BrowsersRatioComposer::class
+        );
+
+        view()->composer(
+            Dashboard\OperatingSystemRationComposer::VIEW,
+            Dashboard\OperatingSystemRationComposer::class
+        );
     }
 }
