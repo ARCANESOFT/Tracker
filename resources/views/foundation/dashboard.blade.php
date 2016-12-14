@@ -20,6 +20,10 @@
         <div class="col-sm-6 col-md-4">
             @include(Arcanesoft\Tracker\ViewComposers\Dashboard\AuthenticatedVisitorsRatioComposer::VIEW)
         </div>
+        <div class="clearfix visible-sm"></div>
+        <div class="col-sm-12 col-md-8">
+            @include(Arcanesoft\Tracker\ViewComposers\Dashboard\LanguagesListComposer::VIEW)
+        </div>
     </div>
 @endsection
 

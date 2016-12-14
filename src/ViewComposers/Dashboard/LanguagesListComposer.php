@@ -3,23 +3,21 @@
 use Arcanesoft\Tracker\Models\Session;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
-use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 
 /**
- * Class     OperatingSystemRationComposer
+ * Class     LanguagesListComposer
  *
  * @package  Arcanesoft\Tracker\ViewComposers\Dashboard
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class OperatingSystemRationComposer extends AbstractViewComposer
+class LanguagesListComposer extends AbstractViewComposer
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.os-ratio-chart';
+    const VIEW = 'tracker::foundation._composers.dashboard.languages-ratio-list';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -39,7 +37,9 @@ class OperatingSystemRationComposer extends AbstractViewComposer
          */
         extract(DateRange::getCurrentMonthDaysRange());
 
-        $view->with('operatingSystemRatio', $this->getOperatingSystemsCountFromSessions($start, $end));
+        $languages = $this->getLanguagesCountFromSessions($start, $end);
+
+        $view->with('languagesRatio',  $this->calculateLanguagesPercentage($languages));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -47,29 +47,47 @@ class OperatingSystemRationComposer extends AbstractViewComposer
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the operating systems count from sessions.
+     * Get the languages count from sessions.
      *
-     * @param  \Carbon\Carbon                  $start
-     * @param  \Carbon\Carbon                  $end
+     * @param  \Carbon\Carbon  $start
+     * @param  \Carbon\Carbon  $end
      *
-     * @return \Illuminate\Support\Collection  $range
+     * @return \Illuminate\Support\Collection
      */
-    private function getOperatingSystemsCountFromSessions(Carbon $start, Carbon $end)
+    private function getLanguagesCountFromSessions($start, $end)
     {
         return $this->getCachedVisitors()
             ->filter(function (Session $visitor) use ($start, $end) {
-                return $visitor->updated_at->between($start, $end) && ! is_null($visitor->device);
+                return $visitor->updated_at->between($start, $end) && ! is_null($visitor->language);
             })
             ->transform(function (Session $visitor) {
-                return $visitor->device;
+                return $visitor->language;
             })
-            ->groupBy('platform')
-            ->transform(function (Collection $items, $platform) {
+            ->groupBy('preference')
+            ->transform(function ($items, $key) {
                 return [
-                    'platform' => $platform,
-                    'count'    => $items->count(),
+                    'name'  => $key,
+                    'count' => $items->count(),
                 ];
             })
             ->sortByDesc('count');
+    }
+
+    /**
+     * Calculate the languages percentage.
+     *
+     * @param  \Illuminate\Support\Collection  $languages
+     *
+     * @return \Illuminate\Support\Collection  $languages
+     */
+    private function calculateLanguagesPercentage($languages)
+    {
+        $total = $languages->sum('count');
+
+        return $languages->transform(function ($item) use ($total) {
+            return $item + [
+                'percentage' => round(($item['count'] / $total) * 100, 2)
+            ];
+        });
     }
 }

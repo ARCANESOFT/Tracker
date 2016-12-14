@@ -3,6 +3,7 @@
 use Arcanesoft\Tracker\Models\Session;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 
 /**
@@ -80,7 +81,7 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
      *
      * @return \Illuminate\Support\Collection
      */
-    private function filterVisitors($start, $end)
+    private function filterVisitors(Carbon $start, Carbon $end)
     {
         return $this->getCachedVisitors()->filter(function (Session $session) use ($start, $end) {
             return $session->updated_at->between($start, $end);

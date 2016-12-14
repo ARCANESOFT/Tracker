@@ -5,8 +5,8 @@ use Arcanesoft\Tracker\Models\Session;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\View\View;
 
 /**
  * Class     DevicesRatioComposer

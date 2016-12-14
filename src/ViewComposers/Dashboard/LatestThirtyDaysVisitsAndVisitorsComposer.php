@@ -51,19 +51,12 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
          */
         extract(DateRange::getCurrentMonthDaysRange($this->format));
 
-        $view->with('thirtyDaysRange', $range->map(function (\Carbon\Carbon $date) {
+        $view->with('thirtyDaysRange', $range->map(function (Carbon $date) {
             return $date->format($this->format);
         }));
 
-        $view->with(
-            'latestVisitsByThirtyDays',
-            $this->prepareVisitsData($start, $end, $range)
-        );
-
-        $view->with(
-            'latestVisitorsByThirtyDays',
-            $this->prepareVisitorsData($start, $end, $range)
-        );
+        $view->with('latestVisitsByThirtyDays',   $this->prepareVisitsData($start, $end, $range));
+        $view->with('latestVisitorsByThirtyDays', $this->prepareVisitorsData($start, $end, $range));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -89,7 +82,7 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
                 return $visitor->created_at->format($this->format);
             });
 
-        return $range->map(function (\Carbon\Carbon $date) use ($visitors) {
+        return $range->map(function (Carbon $date) use ($visitors) {
             return $visitors->get($date->format($this->format), new Collection)->count();
         });
     }
@@ -113,7 +106,7 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
                 return $visit->created_at->format($this->format);
             });
 
-        return $range->map(function (\Carbon\Carbon $date) use ($visits) {
+        return $range->map(function (Carbon $date) use ($visits) {
             return $visits->get($date->format($this->format), new Collection)->count();
         });
     }

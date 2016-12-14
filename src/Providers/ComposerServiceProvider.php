@@ -64,5 +64,10 @@ class ComposerServiceProvider extends ServiceProvider
             Dashboard\OperatingSystemRationComposer::VIEW,
             Dashboard\OperatingSystemRationComposer::class
         );
+
+        view()->composer(
+            Dashboard\LanguagesListComposer::VIEW,
+            Dashboard\LanguagesListComposer::class
+        );
     }
 }

@@ -3,7 +3,9 @@
 use Arcanesoft\Tracker\Models\Session;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 
 /**
  * Class     BrowsersRatioComposer
@@ -52,7 +54,7 @@ class BrowsersRatioComposer extends AbstractViewComposer
      *
      * @return \Illuminate\Support\Collection  $range
      */
-    private function getBrowsersCountFromSessions($start, $end)
+    private function getBrowsersCountFromSessions(Carbon $start, Carbon $end)
     {
         return $this->getCachedVisitors()
             ->filter(function (Session $visitor) use ($start, $end) {
@@ -62,7 +64,7 @@ class BrowsersRatioComposer extends AbstractViewComposer
                 return $visitor->agent;
             })
             ->groupBy('browser')
-            ->transform(function ($items, $key) {
+            ->transform(function (Collection $items, $key) {
                 return [
                     'name'  => $key,
                     'count' => $items->count(),
