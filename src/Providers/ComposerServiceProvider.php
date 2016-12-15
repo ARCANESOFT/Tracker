@@ -69,5 +69,20 @@ class ComposerServiceProvider extends ServiceProvider
             Dashboard\LanguagesListComposer::VIEW,
             Dashboard\LanguagesListComposer::class
         );
+
+        view()->composer(
+            Dashboard\CountriesListComposer::VIEW,
+            Dashboard\CountriesListComposer::class
+        );
+
+        view()->composer(
+            Dashboard\TotalUniqueUsersBoxComposer::VIEW,
+            Dashboard\TotalUniqueUsersBoxComposer::class
+        );
+
+        view()->composer(
+            Dashboard\TotalPageViewsBoxComposer::VIEW,
+            Dashboard\TotalPageViewsBoxComposer::class
+        );
     }
 }
