@@ -67,7 +67,7 @@ class DevicesRatioComposer extends AbstractViewComposer
             ->groupBy('kind')
             ->transform(function ($items, $key) {
                 return [
-                    'kind'  => trans("tracker::device.kinds.$key"),
+                    'kind'  => trans("tracker::devices.kinds.$key"),
                     'count' => $items->count(),
                 ];
             });

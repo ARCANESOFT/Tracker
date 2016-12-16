@@ -21,6 +21,6 @@ trait DevicePresenter
      */
     public function getKindNameAttribute()
     {
-        return trans("tracker::device.kinds.{$this->kind}");
+        return trans("tracker::devices.kinds.{$this->kind}");
     }
 }

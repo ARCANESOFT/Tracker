@@ -29,4 +29,14 @@ class Session extends BaseSession
     {
         return ! is_null($this->user);
     }
+
+    /**
+     * Check if the referer exists.
+     *
+     * @return bool
+     */
+    public function hasReferer()
+    {
+        return ! is_null($this->referer);
+    }
 }

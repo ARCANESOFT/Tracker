@@ -44,7 +44,7 @@
                                 {{ $session->agent->browser }} ({{ $session->agent->browser_version }})
                             </td>
                             <td>
-                                {{ $session->referer->host }}
+                                {{ $session->referer_host }}
                             </td>
                             <td class="text-center">
                                 <span class="label label-info">
