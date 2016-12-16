@@ -4,6 +4,7 @@ use Arcanesoft\Tracker\Models\Session;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 
 /**
  * Class     LanguagesListComposer
@@ -64,7 +65,7 @@ class LanguagesListComposer extends AbstractViewComposer
                 return $visitor->language;
             })
             ->groupBy('preference')
-            ->transform(function ($items, $key) {
+            ->transform(function (Collection $items, $key) {
                 return [
                     'name'  => $key,
                     'count' => $items->count(),
