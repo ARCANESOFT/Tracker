@@ -1,8 +1,11 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers;
 
+use Arcanesoft\Tracker\Models;
+use Arcanesoft\Tracker\Models\Session;
+use Arcanesoft\Tracker\Models\SessionActivity;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Cache;
-use Arcanesoft\Tracker\Models;
 
 /**
  * Class     AbstractViewComposer
@@ -76,22 +79,32 @@ abstract class AbstractViewComposer
     }
 
     /**
-     * @param  string  $format
+     * Get the filtered visitors by date range.
      *
-     * @return array
+     * @param  \Carbon\Carbon  $start
+     * @param  \Carbon\Carbon  $end
+     *
+     * @return \Illuminate\Support\Collection
      */
-    protected function getCurrentMonthDatesRage($format)
+    protected function getVisitorsFilteredByDateRange(Carbon $start, Carbon $end)
     {
-        $start = Carbon::now()->subMonth(1)->setTime(0, 0);
-        $end   = Carbon::now()->setTime(23, 59, 59);
+        return $this->getCachedVisitors()->filter(function (Session $session) use ($start, $end) {
+            return $session->updated_at->between($start, $end);
+        });
+    }
 
-        $range = new Collection;
-
-        foreach (new DatePeriod($start, DateInterval::createFromDateString('1 day'), $end) as $period) {
-            /** @var  \Carbon\Carbon  $period */
-            $range->put($date = $period->format($format), $date);
-        }
-
-        return compact('start', 'end', 'range');
+    /**
+     * Get the filtered visits by date range.
+     *
+     * @param  \Carbon\Carbon  $start
+     * @param  \Carbon\Carbon  $end
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected function getVisitsFilteredByDateRange(Carbon $start, Carbon $end)
+    {
+        return $this->getCachedVisits()->filter(function (SessionActivity $visit) use ($start, $end) {
+            return $visit->created_at->between($start, $end);
+        });
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Arcanedev\LaravelTracker\Models\AbstractModel;
+use Arcanedev\LaravelTracker\Support\BindingManager;
 use Arcanesoft\Tracker\Models;
 
 return [
@@ -27,23 +27,23 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'models' => [
-        AbstractModel::MODEL_AGENT                => Models\Agent::class,
-        AbstractModel::MODEL_COOKIE               => Models\Cookie::class,
-        AbstractModel::MODEL_DEVICE               => Models\Device::class,
-        AbstractModel::MODEL_DOMAIN               => Models\Domain::class,
-        AbstractModel::MODEL_ERROR                => Models\Error::class,
-        AbstractModel::MODEL_GEOIP                => Models\GeoIp::class,
-        AbstractModel::MODEL_LANGUAGE             => Models\Language::class,
-        AbstractModel::MODEL_PATH                 => Models\Path::class,
-        AbstractModel::MODEL_QUERY                => Models\Query::class,
-        AbstractModel::MODEL_REFERER              => Models\Referer::class,
-        AbstractModel::MODEL_REFERER_SEARCH_TERM  => Models\RefererSearchTerm::class,
-        AbstractModel::MODEL_ROUTE                => Models\Route::class,
-        AbstractModel::MODEL_ROUTE_PATH           => Models\RoutePath::class,
-        AbstractModel::MODEL_ROUTE_PATH_PARAMETER => Models\RoutePathParameter::class,
-        AbstractModel::MODEL_SESSION              => Models\Session::class,
-        AbstractModel::MODEL_SESSION_ACTIVITY     => Models\SessionActivity::class,
-        AbstractModel::MODEL_USER                 => Arcanesoft\Auth\Models\User::class,
+        BindingManager::MODEL_AGENT                => Models\Agent::class,
+        BindingManager::MODEL_COOKIE               => Models\Cookie::class,
+        BindingManager::MODEL_DEVICE               => Models\Device::class,
+        BindingManager::MODEL_DOMAIN               => Models\Domain::class,
+        BindingManager::MODEL_ERROR                => Models\Error::class,
+        BindingManager::MODEL_GEOIP                => Models\GeoIp::class,
+        BindingManager::MODEL_LANGUAGE             => Models\Language::class,
+        BindingManager::MODEL_PATH                 => Models\Path::class,
+        BindingManager::MODEL_QUERY                => Models\Query::class,
+        BindingManager::MODEL_REFERER              => Models\Referer::class,
+        BindingManager::MODEL_REFERER_SEARCH_TERM  => Models\RefererSearchTerm::class,
+        BindingManager::MODEL_ROUTE                => Models\Route::class,
+        BindingManager::MODEL_ROUTE_PATH           => Models\RoutePath::class,
+        BindingManager::MODEL_ROUTE_PATH_PARAMETER => Models\RoutePathParameter::class,
+        BindingManager::MODEL_SESSION              => Models\Session::class,
+        BindingManager::MODEL_SESSION_ACTIVITY     => Models\SessionActivity::class,
+        BindingManager::MODEL_USER                 => Arcanesoft\Auth\Models\User::class,
     ],
 
     /* ------------------------------------------------------------------------------------------------

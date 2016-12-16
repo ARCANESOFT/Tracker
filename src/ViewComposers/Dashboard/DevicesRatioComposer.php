@@ -1,6 +1,5 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\Device;
 use Arcanesoft\Tracker\Models\Session;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
@@ -57,75 +56,19 @@ class DevicesRatioComposer extends AbstractViewComposer
      */
     protected function getDevicesFromSessions(Carbon $start, Carbon $end)
     {
-        return $this->getCachedVisitors()
-            ->filter(function (Session $session) use ($start, $end) {
-                return $session->updated_at->between($start, $end) && ! is_null($session->device);
+        return $this->getVisitorsFilteredByDateRange($start, $end)
+            ->filter(function (Session $session) {
+                return $session->hasDevice();
             })
             ->transform(function (Session $session) {
                 return $session->device;
             })
             ->groupBy('kind')
-            ->transform(function ($items, $key) {
+            ->transform(function (Collection $items, $key) {
                 return [
                     'kind'  => trans("tracker::devices.kinds.$key"),
                     'count' => $items->count(),
                 ];
             });
-    }
-
-    /**
-     * Get the computers count.
-     *
-     * @param  \Illuminate\Support\Collection  $devices
-     *
-     * @return int
-     */
-    protected function getComputersCount(Collection $devices)
-    {
-        return $devices->filter(function (Device $device) {
-            return $device->isComputer();
-        })->count();
-    }
-
-    /**
-     * Get the tablets count.
-     *
-     * @param  \Illuminate\Support\Collection  $devices
-     *
-     * @return int
-     */
-    protected function getTabletsCount(Collection $devices)
-    {
-        return $devices->filter(function (Device $device) {
-            return $device->isTablet();
-        })->count();
-    }
-
-    /**
-     * Get the phones count.
-     *
-     * @param  \Illuminate\Support\Collection  $devices
-     *
-     * @return int
-     */
-    protected function getPhonesCount(Collection $devices)
-    {
-        return $devices->filter(function (Device $device) {
-            return $device->isPhone();
-        })->count();
-    }
-
-    /**
-     * Get the computers count.
-     *
-     * @param  \Illuminate\Support\Collection  $devices
-     *
-     * @return int
-     */
-    protected function getUnavailableCount(Collection $devices)
-    {
-        return $devices->reject(function (Device $device) {
-            return $device->isComputer() || $device->isTablet() || $device->isPhone();
-        })->count();
     }
 }

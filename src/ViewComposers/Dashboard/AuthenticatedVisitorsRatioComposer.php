@@ -38,9 +38,9 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
          */
         extract(DateRange::getCurrentMonthDaysRange());
 
-        $visitors = $this->filterVisitors($start, $end);
-
-        $view->with('authenticatedVisitorsRatio', $this->getAuthenticatedVisitorsRatio($visitors));
+        $view->with('authenticatedVisitorsRatio', $this->getAuthenticatedVisitorsRatio(
+            $this->getVisitorsFilteredByDateRange($start, $end)
+        ));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -70,21 +70,6 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
                 'name'  => trans("tracker::users.$key"),
                 'count' => $count,
             ];
-        });
-    }
-
-    /**
-     * Get the filtered visitors.
-     *
-     * @param  \Carbon\Carbon  $start
-     * @param  \Carbon\Carbon  $end
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    private function filterVisitors(Carbon $start, Carbon $end)
-    {
-        return $this->getCachedVisitors()->filter(function (Session $session) use ($start, $end) {
-            return $session->updated_at->between($start, $end);
         });
     }
 }

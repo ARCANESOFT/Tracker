@@ -74,10 +74,7 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
      */
     public function prepareVisitorsData(Carbon $start, Carbon $end, Collection $range)
     {
-        $visitors = $this->getCachedVisitors()
-            ->filter(function (Session $visitor) use ($start, $end) {
-                return $visitor->created_at->between($start, $end);
-            })
+        $visitors = $this->getVisitorsFilteredByDateRange($start, $end)
             ->groupBy(function (Session $visitor) {
                 return $visitor->created_at->format($this->format);
             });
@@ -96,12 +93,10 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
      *
      * @return \Illuminate\Support\Collection
      */
-    public function prepareVisitsData(Carbon $start, Carbon $end, $range)
+    private function prepareVisitsData(Carbon $start, Carbon $end, $range)
     {
-        $visits = $this->getCachedVisits()
-            ->filter(function (SessionActivity $visit) use ($start, $end) {
-                return $visit->created_at->between($start, $end);
-            })
+
+        $visits = $this->getVisitsFilteredByDateRange($start, $end)
             ->groupBy(function (SessionActivity $visit) {
                 return $visit->created_at->format($this->format);
             });

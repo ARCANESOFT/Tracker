@@ -1,25 +1,24 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\Session;
+use Arcanesoft\Tracker\Models\SessionActivity;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
-use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
 /**
- * Class     CountriesListComposer
+ * Class     ReferersListComposer
  *
  * @package  Arcanesoft\Tracker\ViewComposers\Dashboard
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class CountriesListComposer extends AbstractViewComposer
+class ReferersListComposer extends AbstractViewComposer
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.countries-ratio-list';
+    const VIEW = 'tracker::foundation._composers.dashboard.referers-ratio-list';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -39,8 +38,8 @@ class CountriesListComposer extends AbstractViewComposer
          */
         extract(DateRange::getCurrentMonthDaysRange());
 
-        $view->with('countriesRatio', $this->calculateCountriesPercentage(
-            $this->getCountriesCountFromSessions($start, $end)
+        $view->with('referersRatio', $this->calculateLanguagesPercentage(
+            $this->getReferersCountFromSessionActivities($start, $end)
         ));
     }
 
@@ -49,55 +48,45 @@ class CountriesListComposer extends AbstractViewComposer
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the countries count from sessions.
+     * Get the languages count from sessions.
      *
      * @param  \Carbon\Carbon  $start
      * @param  \Carbon\Carbon  $end
      *
      * @return \Illuminate\Support\Collection
      */
-    private function getCountriesCountFromSessions(Carbon $start, Carbon $end)
+    private function getReferersCountFromSessionActivities($start, $end)
     {
-        return $this->getVisitorsFilteredByDateRange($start, $end)
-            ->transform(function (Session $visitor) {
-                return $visitor->hasGeoip()
-                    ? [
-                        'code'  => $visitor->geoip->iso_code,
-                        'geoip' => $visitor->geoip,
-                    ]
-                    : [
-                        'code'  => 'undefined',
-                        'geoip' => null,
-                    ];
+        return $this->getVisitsFilteredByDateRange($start, $end)
+            ->transform(function (SessionActivity $visit) {
+                return [
+                    'name' => $visit->hasReferer()
+                        ? $visit->referer->domain->name
+                        : trans('tracker::referers.undefined'),
+                ];
             })
-            ->groupBy('code')
+            ->groupBy('name')
             ->transform(function (Collection $items, $key) {
-                return ($key === 'undefined')
-                    ? [
-                        'code'  => null,
-                        'name'  => trans('tracker::geoip.undefined'),
-                        'count' => $items->count(),
-                    ]
-                    : [
-                        'code'  => $key,
-                        'name'  => $items->first()['geoip']->country,
-                        'count' => $items->count(),
-                    ];
-            });
+                return [
+                    'name'  => $key,
+                    'count' => $items->count(),
+                ];
+            })
+            ->sortByDesc('count');
     }
 
     /**
-     * Calculate countries percentage.
+     * Calculate the referers percentage.
      *
-     * @param  \Illuminate\Support\Collection  $countries
+     * @param  \Illuminate\Support\Collection  $referers
      *
      * @return \Illuminate\Support\Collection
      */
-    private function calculateCountriesPercentage(Collection $countries)
+    private function calculateLanguagesPercentage($referers)
     {
-        $total = $countries->sum('count');
+        $total = $referers->sum('count');
 
-        return $countries->transform(function ($item) use ($total) {
+        return $referers->transform(function ($item) use ($total) {
             return $item + [
                 'percentage' => round(($item['count'] / $total) * 100, 2)
             ];

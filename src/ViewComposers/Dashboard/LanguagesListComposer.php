@@ -37,9 +37,9 @@ class LanguagesListComposer extends AbstractViewComposer
          */
         extract(DateRange::getCurrentMonthDaysRange());
 
-        $languages = $this->getLanguagesCountFromSessions($start, $end);
-
-        $view->with('languagesRatio',  $this->calculateLanguagesPercentage($languages));
+        $view->with('languagesRatio', $this->calculateLanguagesPercentage(
+            $this->getLanguagesCountFromSessions($start, $end)
+        ));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ class LanguagesListComposer extends AbstractViewComposer
      *
      * @param  \Illuminate\Support\Collection  $languages
      *
-     * @return \Illuminate\Support\Collection  $languages
+     * @return \Illuminate\Support\Collection
      */
     private function calculateLanguagesPercentage($languages)
     {

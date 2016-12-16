@@ -41,6 +41,16 @@ class ComposerServiceProvider extends ServiceProvider
     private function registerDashboardComposers()
     {
         view()->composer(
+            Dashboard\TotalUniqueUsersBoxComposer::VIEW,
+            Dashboard\TotalUniqueUsersBoxComposer::class
+        );
+
+        view()->composer(
+            Dashboard\TotalPageViewsBoxComposer::VIEW,
+            Dashboard\TotalPageViewsBoxComposer::class
+        );
+
+        view()->composer(
             Dashboard\LatestThirtyDaysVisitsAndVisitorsComposer::VIEW,
             Dashboard\LatestThirtyDaysVisitsAndVisitorsComposer::class
         );
@@ -76,13 +86,8 @@ class ComposerServiceProvider extends ServiceProvider
         );
 
         view()->composer(
-            Dashboard\TotalUniqueUsersBoxComposer::VIEW,
-            Dashboard\TotalUniqueUsersBoxComposer::class
-        );
-
-        view()->composer(
-            Dashboard\TotalPageViewsBoxComposer::VIEW,
-            Dashboard\TotalPageViewsBoxComposer::class
+            Dashboard\ReferersListComposer::VIEW,
+            Dashboard\ReferersListComposer::class
         );
     }
 }

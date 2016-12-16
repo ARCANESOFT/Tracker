@@ -42,6 +42,10 @@
                 <div class="col-lg-6">
                     @include(Arcanesoft\Tracker\ViewComposers\Dashboard\CountriesListComposer::VIEW)
                 </div>
+                <div class="clearfix visible-lg"></div>
+                <div class="col-lg-6">
+                    @include(Arcanesoft\Tracker\ViewComposers\Dashboard\ReferersListComposer::VIEW)
+                </div>
             </div>
         </div>
     </div>

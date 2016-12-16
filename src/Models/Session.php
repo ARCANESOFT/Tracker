@@ -15,28 +15,4 @@ class Session extends BaseSession
      | ------------------------------------------------------------------------------------------------
      */
     use Presenters\SessionPresenter;
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Check Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Check if the user exists.
-     *
-     * @return bool
-     */
-    public function hasUser()
-    {
-        return ! is_null($this->user);
-    }
-
-    /**
-     * Check if the referer exists.
-     *
-     * @return bool
-     */
-    public function hasReferer()
-    {
-        return ! is_null($this->referer);
-    }
 }

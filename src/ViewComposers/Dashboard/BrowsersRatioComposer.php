@@ -52,13 +52,13 @@ class BrowsersRatioComposer extends AbstractViewComposer
      * @param  \Carbon\Carbon                  $start
      * @param  \Carbon\Carbon                  $end
      *
-     * @return \Illuminate\Support\Collection  $range
+     * @return \Illuminate\Support\Collection
      */
     private function getBrowsersCountFromSessions(Carbon $start, Carbon $end)
     {
-        return $this->getCachedVisitors()
-            ->filter(function (Session $visitor) use ($start, $end) {
-                return $visitor->updated_at->between($start, $end) && ! is_null($visitor->agent);
+        return $this->getVisitorsFilteredByDateRange($start, $end)
+            ->filter(function (Session $visitor) {
+                return $visitor->hasUserAgent();
             })
             ->transform(function (Session $visitor) {
                 return $visitor->agent;
