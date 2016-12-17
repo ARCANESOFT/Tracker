@@ -19,7 +19,7 @@ class BrowsersRatioComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.browsers-ratio-chart';
+    const VIEW = 'tracker::admin._composers.dashboard.browsers-ratio-chart';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

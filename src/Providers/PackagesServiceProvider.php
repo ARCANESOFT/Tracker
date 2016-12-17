@@ -38,7 +38,7 @@ class PackagesServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return parent::provides();
     }
 
     /* ------------------------------------------------------------------------------------------------

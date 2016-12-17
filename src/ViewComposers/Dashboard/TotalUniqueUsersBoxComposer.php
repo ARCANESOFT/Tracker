@@ -17,7 +17,7 @@ class TotalUniqueUsersBoxComposer extends AbstractViewComposer
      | ------------------------------------------------------------------------------------------------
      */
 
-    const VIEW = 'tracker::foundation._composers.dashboard.total-unique-visitors-box';
+    const VIEW = 'tracker::admin._composers.dashboard.total-unique-visitors-box';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

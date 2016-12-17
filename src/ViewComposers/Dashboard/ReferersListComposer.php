@@ -18,7 +18,7 @@ class ReferersListComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.referers-ratio-list';
+    const VIEW = 'tracker::admin._composers.dashboard.referers-ratio-list';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

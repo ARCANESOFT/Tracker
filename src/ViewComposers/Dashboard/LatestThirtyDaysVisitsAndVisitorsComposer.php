@@ -20,7 +20,7 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.latest-thirty-days-visits-and-visitors-chart';
+    const VIEW = 'tracker::admin._composers.dashboard.latest-thirty-days-visits-and-visitors-chart';
 
     /* ------------------------------------------------------------------------------------------------
      |  Properties

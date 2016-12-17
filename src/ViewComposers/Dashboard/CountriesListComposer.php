@@ -19,7 +19,7 @@ class CountriesListComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.countries-ratio-list';
+    const VIEW = 'tracker::admin._composers.dashboard.countries-ratio-list';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
