@@ -19,7 +19,7 @@ class DevicesRatioComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.devices-ratio-chart';
+    const VIEW = 'tracker::admin._composers.dashboard.devices-ratio-chart';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

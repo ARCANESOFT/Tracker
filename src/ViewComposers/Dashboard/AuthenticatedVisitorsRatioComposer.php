@@ -16,7 +16,7 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.authenticated-visitors-ratio-chart';
+    const VIEW = 'tracker::admin._composers.dashboard.authenticated-visitors-ratio-chart';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

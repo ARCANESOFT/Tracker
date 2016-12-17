@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function getRouteNamespace()
     {
-        return 'Arcanesoft\\Media\\Http\\Routes';
+        return 'Arcanesoft\\Tracker\\Http\\Routes\\Admin';
     }
 
     /**
@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $prefix = Arr::get($this->getFoundationRouteGroup(), 'prefix', 'dashboard');
 
-        return "$prefix/" . config('arcanesoft.tracker.route.prefix', 'media');
+        return "$prefix/" . config('arcanesoft.tracker.route.prefix', 'tracker');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -46,25 +46,30 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Contracts\Routing\Registrar $router
+     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
     public function map(Router $router)
     {
-        $this->mapFoundationRoutes($router);
+        $this->mapAdminRoutes($router);
     }
 
-    private function mapFoundationRoutes(Router $router)
+    /**
+     * Register the admin routes.
+     *
+     * @param  \Illuminate\Contracts\Routing\Registrar $router
+     */
+    private function mapAdminRoutes(Router $router)
     {
         $attributes = array_merge($this->getFoundationRouteGroup(), [
-            'as'        => 'tracker::foundation.',
-            'namespace' => 'Arcanesoft\\Tracker\\Http\\Controllers',
+            'as'        => 'admin::tracker.',
+            'namespace' => 'Arcanesoft\\Tracker\\Http\\Controllers\\Admin',
         ]);
 
         $router->group(array_merge(
             $attributes,
             ['prefix' => $this->getFoundationAuthPrefix()]
         ), function (Router $router) {
-            Routes\TrackerRoutes::register($router);
+            Routes\Admin\TrackerRoutes::register($router);
         });
     }
 }

@@ -16,7 +16,7 @@ class TotalPageViewsBoxComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.total-page-views-box';
+    const VIEW = 'tracker::admin._composers.dashboard.total-page-views-box';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

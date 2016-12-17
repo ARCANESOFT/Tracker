@@ -18,7 +18,7 @@ class LanguagesListComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.languages-ratio-list';
+    const VIEW = 'tracker::admin._composers.dashboard.languages-ratio-list';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

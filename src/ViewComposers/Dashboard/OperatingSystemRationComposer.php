@@ -19,7 +19,7 @@ class OperatingSystemRationComposer extends AbstractViewComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW = 'tracker::foundation._composers.dashboard.os-ratio-chart';
+    const VIEW = 'tracker::admin._composers.dashboard.os-ratio-chart';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
