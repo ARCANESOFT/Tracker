@@ -18,23 +18,13 @@ class RouteServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the routes namespace
-     *
-     * @return string
-     */
-    protected function getRouteNamespace()
-    {
-        return 'Arcanesoft\\Tracker\\Http\\Routes\\Admin';
-    }
-
-    /**
      * Get the auth foundation route prefix.
      *
      * @return string
      */
-    public function getFoundationAuthPrefix()
+    public function getAdminTrackerPrefix()
     {
-        $prefix = Arr::get($this->getFoundationRouteGroup(), 'prefix', 'dashboard');
+        $prefix = Arr::get($this->getAdminRouteGroup(), 'prefix', 'dashboard');
 
         return "$prefix/" . config('arcanesoft.tracker.route.prefix', 'tracker');
     }
@@ -60,14 +50,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function mapAdminRoutes(Router $router)
     {
-        $attributes = array_merge($this->getFoundationRouteGroup(), [
+        $attributes = array_merge($this->getAdminRouteGroup(), [
             'as'        => 'admin::tracker.',
             'namespace' => 'Arcanesoft\\Tracker\\Http\\Controllers\\Admin',
         ]);
 
         $router->group(array_merge(
             $attributes,
-            ['prefix' => $this->getFoundationAuthPrefix()]
+            ['prefix' => $this->getAdminTrackerPrefix()]
         ), function (Router $router) {
             Routes\Admin\TrackerRoutes::register($router);
         });

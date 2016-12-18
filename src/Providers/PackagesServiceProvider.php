@@ -50,7 +50,7 @@ class PackagesServiceProvider extends ServiceProvider
      */
     private function registerLaravelTrackerPackage()
     {
-        $this->app->register(LaravelTrackerServiceProvider::class);
+        $this->registerProvider(LaravelTrackerServiceProvider::class);
 
         /** @var \Illuminate\Contracts\Config\Repository  $config */
         $config = $this->app['config'];

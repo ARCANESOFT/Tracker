@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\Providers;
 
-use Arcanedev\Support\ServiceProvider;
+use Arcanedev\Support\Providers\CommandServiceProvider as ServiceProvider;
 
 /**
  * Class     CommandServiceProvider
@@ -10,5 +10,14 @@ use Arcanedev\Support\ServiceProvider;
  */
 class CommandServiceProvider extends ServiceProvider
 {
-    //
+    /* ------------------------------------------------------------------------------------------------
+     |  Properties
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * The commands to be registered.
+     *
+     * @var array
+     */
+    protected $commands = [];
 }
