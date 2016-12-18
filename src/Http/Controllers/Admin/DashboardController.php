@@ -34,6 +34,6 @@ class DashboardController extends Controller
 
         $activities = SessionActivity::all()->toArray();
 
-        return $this->view('foundation.dashboard', compact('activities'));
+        return $this->view('admin.dashboard', compact('activities'));
     }
 }
