@@ -70,10 +70,11 @@ return [
     'routes' => [
         'ignore' => [
             'names' => [
-                // route names like 'blog.*'
+                // Route names like 'blog.*'
+                'admin::*',
             ],
             'uris'  => [
-                'dashboard', 'dashboard/*'
+                // URIs like 'dashboard/*'
             ],
         ],
 

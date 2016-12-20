@@ -30,5 +30,15 @@ return [
                 //
             ],
         ],
+        [
+            'title'       => 'Settings',
+            'name'        => 'tracker-settings',
+            'route'       => 'admin::tracker.settings.index',
+            'icon'        => 'fa fa-fw fa-cogs',
+            'roles'       => [Role::ADMINISTRATOR],
+            'permissions' => [
+                //
+            ],
+        ],
     ],
 ];
