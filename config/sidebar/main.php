@@ -5,7 +5,7 @@ use Arcanesoft\Auth\Models\Role;
 return [
     'title'       => 'Tracker',
     'name'        => 'tracker',
-    'route'       => 'tracker::foundation.stats.index',
+    'route'       => 'admin::tracker.stats.index',
     'icon'        => 'fa fa-fw fa-binoculars',
     'roles'       => [Role::ADMINISTRATOR],
     'permissions' => [],
@@ -13,7 +13,7 @@ return [
         [
             'title'       => 'Statistics',
             'name'        => 'tracker-dashboard',
-            'route'       => 'tracker::foundation.stats.index',
+            'route'       => 'admin::tracker.stats.index',
             'icon'        => 'fa fa-fw fa-bar-chart',
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [
@@ -23,7 +23,7 @@ return [
         [
             'title'       => 'Visits',
             'name'        => 'tracker-visits',
-            'route'       => 'tracker::foundation.visits.index',
+            'route'       => 'admin::tracker.visits.index',
             'icon'        => 'fa fa-fw fa-info-circle',
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [
