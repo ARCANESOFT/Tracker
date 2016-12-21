@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         $attributes = $this->getAdminAttributes(
             'tracker.',
             'Arcanesoft\\Tracker\\Http\\Controllers\\Admin',
-            config('arcanesoft.tracker.route.prefix', 'tracker')
+            $this->config()->get('arcanesoft.tracker.route.prefix', 'tracker')
         );
 
         $router->group($attributes, function (Router $router) {
