@@ -3,7 +3,6 @@
 use Arcanesoft\Core\Bases\RouteServiceProvider as ServiceProvider;
 use Arcanesoft\Tracker\Http\Routes;
 use Illuminate\Contracts\Routing\Registrar as Router;
-use Illuminate\Support\Arr;
 
 /**
  * Class     RouteServiceProvider
@@ -13,22 +12,6 @@ use Illuminate\Support\Arr;
  */
 class RouteServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the auth foundation route prefix.
-     *
-     * @return string
-     */
-    public function getAdminTrackerPrefix()
-    {
-        $prefix = Arr::get($this->getAdminRouteGroup(), 'prefix', 'dashboard');
-
-        return "$prefix/" . config('arcanesoft.tracker.route.prefix', 'tracker');
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -43,6 +26,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminRoutes($router);
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Routes
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Register the admin routes.
      *
@@ -50,15 +37,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function mapAdminRoutes(Router $router)
     {
-        $attributes = array_merge($this->getAdminRouteGroup(), [
-            'as'        => 'admin::tracker.',
-            'namespace' => 'Arcanesoft\\Tracker\\Http\\Controllers\\Admin',
-        ]);
+        $attributes = $this->getAdminAttributes(
+            'tracker.',
+            'Arcanesoft\\Tracker\\Http\\Controllers\\Admin',
+            config('arcanesoft.tracker.route.prefix', 'tracker')
+        );
 
-        $router->group(array_merge(
-            $attributes,
-            ['prefix' => $this->getAdminTrackerPrefix()]
-        ), function (Router $router) {
+        $router->group($attributes, function (Router $router) {
             Routes\Admin\TrackerRoutes::register($router);
         });
     }
