@@ -26,8 +26,8 @@ class TrackerRoutes extends RouteRegister
             $this->get('/', 'DashboardController@index')->name('index'); // admin::tracker.stats.index
         });
 
-        $this->group(['prefix' => 'visits', 'as' => 'visits.'], function () {
-            $this->get('/', 'VisitsController@index')->name('index'); // admin::tracker.visits.index
+        $this->group(['prefix' => 'visitors', 'as' => 'visitors.'], function () {
+            $this->get('/', 'VisitorsController@index')->name('index'); // admin::tracker.visitors.index
         });
 
         $this->group(['prefix' => 'settings', 'as' => 'settings.'], function () {

@@ -1,7 +1,7 @@
 <?php namespace Arcanesoft\Tracker\Models\Presenters;
 
 /**
- * Class     SessionPresenter
+ * Trait     VisitorPresenter
  *
  * @package  Arcanesoft\Tracker\Models\Presenters
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
@@ -9,7 +9,7 @@
  * @property  \Arcanesoft\Auth\Models\User        user
  * @property  \Arcanesoft\Tracker\Models\Referer  referer
  */
-trait SessionPresenter
+trait VisitorPresenter
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters

@@ -1,18 +1,18 @@
 <?php namespace Arcanesoft\Tracker\Models;
 
-use Arcanedev\LaravelTracker\Models\Session as BaseSession;
+use Arcanedev\LaravelTracker\Models\Visitor as BaseVisitor;
 
 /**
- * Class     Session
+ * Class     Visitor
  *
  * @package  Arcanesoft\Tracker\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Session extends BaseSession
+class Visitor extends BaseVisitor
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
      | ------------------------------------------------------------------------------------------------
      */
-    use Presenters\SessionPresenter;
+    use Presenters\VisitorPresenter;
 }

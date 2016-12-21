@@ -1,7 +1,7 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\Session;
-use Arcanesoft\Tracker\Models\SessionActivity;
+use Arcanesoft\Tracker\Models\Visitor;
+use Arcanesoft\Tracker\Models\VisitorActivity;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Carbon\Carbon;
@@ -75,7 +75,7 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
     public function prepareVisitorsData(Carbon $start, Carbon $end, Collection $range)
     {
         $visitors = $this->getVisitorsFilteredByDateRange($start, $end)
-            ->groupBy(function (Session $visitor) {
+            ->groupBy(function (Visitor $visitor) {
                 return $visitor->created_at->format($this->format);
             });
 
@@ -97,7 +97,7 @@ class LatestThirtyDaysVisitsAndVisitorsComposer extends AbstractViewComposer
     {
 
         $visits = $this->getVisitsFilteredByDateRange($start, $end)
-            ->groupBy(function (SessionActivity $visit) {
+            ->groupBy(function (VisitorActivity $visit) {
                 return $visit->created_at->format($this->format);
             });
 

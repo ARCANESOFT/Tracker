@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\Session;
+use Arcanesoft\Tracker\Models\Visitor;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Carbon\Carbon;
@@ -59,7 +59,7 @@ class CountriesListComposer extends AbstractViewComposer
     private function getCountriesCountFromSessions(Carbon $start, Carbon $end)
     {
         return $this->getVisitorsFilteredByDateRange($start, $end)
-            ->transform(function (Session $visitor) {
+            ->transform(function (Visitor $visitor) {
                 return $visitor->hasGeoip()
                     ? [
                         'code'  => $visitor->geoip->iso_code,

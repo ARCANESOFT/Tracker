@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\Http\Controllers\Admin;
 
-use Arcanedev\LaravelTracker\Models\SessionActivity;
+use Arcanedev\LaravelTracker\Models\VisitorActivity;
 
 /**
  * Class     DashboardController
@@ -32,7 +32,7 @@ class DashboardController extends Controller
     {
         $this->setTitle('Tracker');
 
-        $activities = SessionActivity::all()->toArray();
+        $activities = VisitorActivity::all()->toArray();
 
         return $this->view('admin.dashboard', compact('activities'));
     }

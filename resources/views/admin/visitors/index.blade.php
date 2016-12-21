@@ -1,11 +1,11 @@
 @section('header')
-    <h1>Tracker <small>Visits</small></h1>
+    <h1>Tracker <small>Visitors</small></h1>
 @endsection
 
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <h2 class="box-title">Visits</h2>
+            <h2 class="box-title">Visitors</h2>
         </div>
         <div class="box-body no-padding">
             <div class="table-responsive">
@@ -23,43 +23,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @if ($sessions->count())
-                        @foreach ($sessions as $session)
+                    @if ($visitors->count())
+                        @foreach ($visitors as $visitor)
                         <tr>
                             <td>
                                 <span class="label label-inverse">
-                                    {{ $session->client_ip }}
+                                    {{ $visitor->client_ip }}
                                 </span>
                             </td>
                             <td>
-                                {{ $session->location_name }}
+                                {{ $visitor->location_name }}
                             </td>
                             <td>
-                                {{ $session->username }}
+                                {{ $visitor->username }}
                             </td>
                             <td>
-                                {{ $session->device->kind_name }} [{{ $session->device->platform }}]
+                                {{ $visitor->device->kind_name }} [{{ $visitor->device->platform }}]
                             </td>
                             <td>
-                                {{ $session->agent->browser }} ({{ $session->agent->browser_version }})
+                                {{ $visitor->agent->browser }} ({{ $visitor->agent->browser_version }})
                             </td>
                             <td>
-                                {{ $session->referer_host }}
+                                {{ $visitor->referer_host }}
                             </td>
                             <td class="text-center">
                                 <span class="label label-info">
-                                    {{ $session->activities->count() }}
+                                    {{ $visitor->activities->count() }}
                                 </span>
                             </td>
                             <td>
-                                {{ $session->updated_at->diffForHumans() }}
+                                {{ $visitor->updated_at->diffForHumans() }}
                             </td>
                         </tr>
                         @endforeach
                     @else
                         <tr>
                             <td colspan="8" class="text-center">
-                                <span class="label label-default">The visits list is empty!</span>
+                                <span class="label label-default">The visitors list is empty!</span>
                             </td>
                         </tr>
                     @endif

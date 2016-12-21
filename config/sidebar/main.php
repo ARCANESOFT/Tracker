@@ -21,10 +21,10 @@ return [
             ],
         ],
         [
-            'title'       => 'Visits',
-            'name'        => 'tracker-visits',
-            'route'       => 'admin::tracker.visits.index',
-            'icon'        => 'fa fa-fw fa-info-circle',
+            'title'       => 'Visitors',
+            'name'        => 'tracker-visitors',
+            'route'       => 'admin::tracker.visitors.index',
+            'icon'        => 'fa fa-fw fa-users',
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [
                 //

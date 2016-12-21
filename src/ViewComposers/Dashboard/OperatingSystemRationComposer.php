@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\Session;
+use Arcanesoft\Tracker\Models\Visitor;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Carbon\Carbon;
@@ -57,10 +57,10 @@ class OperatingSystemRationComposer extends AbstractViewComposer
     private function getOperatingSystemsCountFromSessions(Carbon $start, Carbon $end)
     {
         return $this->getVisitorsFilteredByDateRange($start, $end)
-            ->filter(function (Session $visitor) {
+            ->filter(function (Visitor $visitor) {
                 return $visitor->hasDevice();
             })
-            ->transform(function (Session $visitor) {
+            ->transform(function (Visitor $visitor) {
                 return $visitor->device;
             })
             ->groupBy('platform')

@@ -1,14 +1,14 @@
 <?php namespace Arcanesoft\Tracker\Models;
 
-use Arcanedev\LaravelTracker\Models\SessionActivity as BaseSessionActivity;
+use Arcanedev\LaravelTracker\Models\VisitorActivity as BaseVisitorActivity;
 
 /**
- * Class     SessionActivity
+ * Class     VisitorActivity
  *
  * @package  Arcanesoft\Tracker\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SessionActivity extends BaseSessionActivity
+class VisitorActivity extends BaseVisitorActivity
 {
     //
 }

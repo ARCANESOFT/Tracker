@@ -1,28 +1,28 @@
 <?php namespace Arcanesoft\Tracker\Http\Controllers\Admin;
 
-use Arcanesoft\Tracker\Models\Session;
+use Arcanesoft\Tracker\Models\Visitor;
 
 /**
- * Class     VisitsController
+ * Class     VisitorsController
  *
  * @package  Arcanesoft\Tracker\Http\Controllers\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class VisitsController extends Controller
+class VisitorsController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * VisitsController constructor.
+     * VisitorsController constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
-        $this->addBreadcrumbRoute('Views', 'admin::tracker.visits.index');
-        $this->setCurrentPage('tracker-visits');
+        $this->addBreadcrumbRoute('Visitors', 'admin::tracker.visitors.index');
+        $this->setCurrentPage('tracker-visitors');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -31,11 +31,11 @@ class VisitsController extends Controller
      */
     public function index()
     {
-        $this->setTitle('Visits list - Tracker');
+        $this->setTitle('Visitors list - Tracker');
 
-        $sessions = Session::with(['user', 'device', 'agent', 'geoip', 'referer', 'cookie', 'language', 'activities'])
+        $visitors = Visitor::with(['user', 'device', 'agent', 'geoip', 'referer', 'cookie', 'language', 'activities'])
             ->paginate(50);
 
-        return $this->view('admin.visits.index', compact('sessions'));
+        return $this->view('admin.visitors.index', compact('visitors'));
     }
 }

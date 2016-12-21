@@ -1,8 +1,8 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers;
 
 use Arcanesoft\Tracker\Models;
-use Arcanesoft\Tracker\Models\Session;
-use Arcanesoft\Tracker\Models\SessionActivity;
+use Arcanesoft\Tracker\Models\Visitor;
+use Arcanesoft\Tracker\Models\VisitorActivity;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Cache;
@@ -45,7 +45,7 @@ abstract class AbstractViewComposer
     protected function getCachedVisitors()
     {
         return $this->cacheResults('visitors', function () {
-            return Models\Session::with(['user', 'device', 'language', 'agent', 'cookie', 'referer', 'geoip'])->get();
+            return Models\Visitor::with(['user', 'device', 'language', 'agent', 'cookie', 'referer', 'geoip'])->get();
         });
     }
 
@@ -57,7 +57,7 @@ abstract class AbstractViewComposer
     protected function getCachedVisits()
     {
         return $this->cacheResults('visits', function () {
-            return Models\SessionActivity::all();
+            return Models\VisitorActivity::all();
         });
     }
 
@@ -88,7 +88,7 @@ abstract class AbstractViewComposer
      */
     protected function getVisitorsFilteredByDateRange(Carbon $start, Carbon $end)
     {
-        return $this->getCachedVisitors()->filter(function (Session $session) use ($start, $end) {
+        return $this->getCachedVisitors()->filter(function (Visitor $session) use ($start, $end) {
             return $session->updated_at->between($start, $end);
         });
     }
@@ -103,7 +103,7 @@ abstract class AbstractViewComposer
      */
     protected function getVisitsFilteredByDateRange(Carbon $start, Carbon $end)
     {
-        return $this->getCachedVisits()->filter(function (SessionActivity $visit) use ($start, $end) {
+        return $this->getCachedVisits()->filter(function (VisitorActivity $visit) use ($start, $end) {
             return $visit->created_at->between($start, $end);
         });
     }

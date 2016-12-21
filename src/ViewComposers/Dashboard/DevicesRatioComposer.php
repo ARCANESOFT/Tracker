@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\Session;
+use Arcanesoft\Tracker\Models\Visitor;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Carbon\Carbon;
@@ -57,10 +57,10 @@ class DevicesRatioComposer extends AbstractViewComposer
     protected function getDevicesFromSessions(Carbon $start, Carbon $end)
     {
         return $this->getVisitorsFilteredByDateRange($start, $end)
-            ->filter(function (Session $session) {
+            ->filter(function (Visitor $session) {
                 return $session->hasDevice();
             })
-            ->transform(function (Session $session) {
+            ->transform(function (Visitor $session) {
                 return $session->device;
             })
             ->groupBy('kind')

@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\SessionActivity;
+use Arcanesoft\Tracker\Models\VisitorActivity;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Illuminate\Contracts\View\View;
@@ -58,7 +58,7 @@ class ReferersListComposer extends AbstractViewComposer
     private function getReferersCountFromSessionActivities($start, $end)
     {
         return $this->getVisitsFilteredByDateRange($start, $end)
-            ->transform(function (SessionActivity $visit) {
+            ->transform(function (VisitorActivity $visit) {
                 return [
                     'name' => $visit->hasReferer()
                         ? $visit->referer->domain->name

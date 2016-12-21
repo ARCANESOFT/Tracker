@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\ViewComposers\Dashboard;
 
-use Arcanesoft\Tracker\Models\Session;
+use Arcanesoft\Tracker\Models\Visitor;
 use Arcanesoft\Tracker\Support\DateRange;
 use Arcanesoft\Tracker\ViewComposers\AbstractViewComposer;
 use Illuminate\Contracts\View\View;
@@ -58,10 +58,10 @@ class LanguagesListComposer extends AbstractViewComposer
     private function getLanguagesCountFromSessions($start, $end)
     {
         return $this->getCachedVisitors()
-            ->filter(function (Session $visitor) use ($start, $end) {
+            ->filter(function (Visitor $visitor) use ($start, $end) {
                 return $visitor->updated_at->between($start, $end) && ! is_null($visitor->language);
             })
-            ->transform(function (Session $visitor) {
+            ->transform(function (Visitor $visitor) {
                 return $visitor->language;
             })
             ->groupBy('preference')
