@@ -5,7 +5,6 @@ use Arcanesoft\Auth\Models\Role;
 return [
     'title'       => 'Tracker',
     'name'        => 'tracker',
-    'route'       => 'admin::tracker.stats.index',
     'icon'        => 'fa fa-fw fa-binoculars',
     'roles'       => [Role::ADMINISTRATOR],
     'permissions' => [],

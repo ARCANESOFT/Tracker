@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Tracker\Http\Routes\Admin;
 
-use Arcanedev\Support\Bases\RouteRegister;
-use Illuminate\Contracts\Routing\Registrar;
+use Arcanedev\Support\Routing\RouteRegistrar;
 
 /**
  * Class     TrackerRoutes
@@ -9,7 +8,7 @@ use Illuminate\Contracts\Routing\Registrar;
  * @package  Arcanesoft\Tracker\Http\Routes\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TrackerRoutes extends RouteRegister
+class TrackerRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -17,21 +16,22 @@ class TrackerRoutes extends RouteRegister
      */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
-        $this->group(['prefix' => 'stats', 'as' => 'stats.'], function () {
-            $this->get('/', 'DashboardController@index')->name('index'); // admin::tracker.stats.index
+        $this->prefix('stats')->name('stats.')->group(function () {
+            $this->get('/', 'DashboardController@index')
+                 ->name('index'); // admin::tracker.stats.index
         });
 
-        $this->group(['prefix' => 'visitors', 'as' => 'visitors.'], function () {
-            $this->get('/', 'VisitorsController@index')->name('index'); // admin::tracker.visitors.index
+        $this->prefix('visitors')->name('visitors.')->group(function () {
+            $this->get('/', 'VisitorsController@index')
+                 ->name('index'); // admin::tracker.visitors.index
         });
 
-        $this->group(['prefix' => 'settings', 'as' => 'settings.'], function () {
-            $this->get('/', 'SettingsController@index')->name('index'); // admin::tracker.settings.index
+        $this->prefix('settings')->name('settings.')->group(function () {
+            $this->get('/', 'SettingsController@index')
+                 ->name('index'); // admin::tracker.settings.index
         });
     }
 }
