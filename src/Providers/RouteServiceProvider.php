@@ -2,7 +2,6 @@
 
 use Arcanesoft\Core\Bases\RouteServiceProvider as ServiceProvider;
 use Arcanesoft\Tracker\Http\Routes;
-use Illuminate\Contracts\Routing\Registrar as Router;
 
 /**
  * Class     RouteServiceProvider
@@ -18,12 +17,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     /**
      * Define the routes for the application.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Router $router)
+    public function map()
     {
-        $this->mapAdminRoutes($router);
+        $this->mapAdminRoutes();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -32,10 +29,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     /**
      * Register the admin routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar $router
      */
-    private function mapAdminRoutes(Router $router)
+    private function mapAdminRoutes()
     {
         $attributes = $this->getAdminAttributes(
             'tracker.',
@@ -43,8 +38,8 @@ class RouteServiceProvider extends ServiceProvider
             $this->config()->get('arcanesoft.tracker.route.prefix', 'tracker')
         );
 
-        $router->group($attributes, function (Router $router) {
-            Routes\Admin\TrackerRoutes::register($router);
+        $this->group($attributes, function () {
+            Routes\Admin\TrackerRoutes::register();
         });
     }
 }

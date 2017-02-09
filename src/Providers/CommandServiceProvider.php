@@ -19,5 +19,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $commands = [];
+    protected $commands = [
+        //
+    ];
 }

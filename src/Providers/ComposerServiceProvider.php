@@ -1,7 +1,16 @@
 <?php namespace Arcanesoft\Tracker\Providers;
 
-use Arcanedev\Support\ServiceProvider;
-use Arcanesoft\Tracker\ViewComposers\Dashboard;
+use Arcanedev\Support\Providers\ViewComposerServiceProvider as ServiceProvider;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\AuthenticatedVisitorsRatioComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\BrowsersRatioComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\CountriesListComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\DevicesRatioComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\LanguagesListComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\LatestThirtyDaysVisitsAndVisitorsComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\OperatingSystemRationComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\ReferersListComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\TotalPageViewsBoxComposer;
+use Arcanesoft\Tracker\ViewComposers\Dashboard\TotalUniqueUsersBoxComposer;
 
 /**
  * Class     ComposerServiceProvider
@@ -12,82 +21,25 @@ use Arcanesoft\Tracker\ViewComposers\Dashboard;
 class ComposerServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
+     |  Properties
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * {@inheritdoc}
+     * Register the composer classes.
+     *
+     * @var array
      */
-    public function boot()
-    {
-        $this->registerDashboardComposers();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function register()
-    {
-        //
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Register all the dashboard view composers.
-     */
-    private function registerDashboardComposers()
-    {
-        view()->composer(
-            Dashboard\TotalUniqueUsersBoxComposer::VIEW,
-            Dashboard\TotalUniqueUsersBoxComposer::class
-        );
-
-        view()->composer(
-            Dashboard\TotalPageViewsBoxComposer::VIEW,
-            Dashboard\TotalPageViewsBoxComposer::class
-        );
-
-        view()->composer(
-            Dashboard\LatestThirtyDaysVisitsAndVisitorsComposer::VIEW,
-            Dashboard\LatestThirtyDaysVisitsAndVisitorsComposer::class
-        );
-
-        view()->composer(
-            Dashboard\AuthenticatedVisitorsRatioComposer::VIEW,
-            Dashboard\AuthenticatedVisitorsRatioComposer::class
-        );
-
-        view()->composer(
-            Dashboard\DevicesRatioComposer::VIEW,
-            Dashboard\DevicesRatioComposer::class
-        );
-
-        view()->composer(
-            Dashboard\BrowsersRatioComposer::VIEW,
-            Dashboard\BrowsersRatioComposer::class
-        );
-
-        view()->composer(
-            Dashboard\OperatingSystemRationComposer::VIEW,
-            Dashboard\OperatingSystemRationComposer::class
-        );
-
-        view()->composer(
-            Dashboard\LanguagesListComposer::VIEW,
-            Dashboard\LanguagesListComposer::class
-        );
-
-        view()->composer(
-            Dashboard\CountriesListComposer::VIEW,
-            Dashboard\CountriesListComposer::class
-        );
-
-        view()->composer(
-            Dashboard\ReferersListComposer::VIEW,
-            Dashboard\ReferersListComposer::class
-        );
-    }
+    protected $composerClasses = [
+        // Dashboard view composers
+        TotalUniqueUsersBoxComposer::VIEW               => TotalUniqueUsersBoxComposer::class,
+        TotalPageViewsBoxComposer::VIEW                 => TotalPageViewsBoxComposer::class,
+        LatestThirtyDaysVisitsAndVisitorsComposer::VIEW => LatestThirtyDaysVisitsAndVisitorsComposer::class,
+        AuthenticatedVisitorsRatioComposer::VIEW        => AuthenticatedVisitorsRatioComposer::class,
+        DevicesRatioComposer::VIEW                      => DevicesRatioComposer::class,
+        BrowsersRatioComposer::VIEW                     => BrowsersRatioComposer::class,
+        OperatingSystemRationComposer::VIEW             => OperatingSystemRationComposer::class,
+        LanguagesListComposer::VIEW                     => LanguagesListComposer::class,
+        CountriesListComposer::VIEW                     => CountriesListComposer::class,
+        ReferersListComposer::VIEW                      => ReferersListComposer::class,
+    ];
 }

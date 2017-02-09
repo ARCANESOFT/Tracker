@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Tracker\Providers;
 
-use Arcanedev\Support\ServiceProvider;
+use Arcanedev\Support\Providers\AuthorizationServiceProvider as ServiceProvider;
 
 /**
  * Class     AuthorizationServiceProvider

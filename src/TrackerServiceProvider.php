@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Tracker;
 
 use Arcanesoft\Core\Bases\PackageServiceProvider;
-use Arcanesoft\Core\CoreServiceProvider;
 
 /**
  * Class     TrackerServiceProvider
@@ -41,14 +40,15 @@ class TrackerServiceProvider extends PackageServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     *
+     * Register the service provider.
      */
     public function register()
     {
+        parent::register();
+
         $this->registerConfig();
         $this->registerSidebarItems();
         $this->registerProviders([
-            CoreServiceProvider::class,
             Providers\PackagesServiceProvider::class,
             Providers\AuthorizationServiceProvider::class,
             Providers\ComposerServiceProvider::class,
@@ -57,11 +57,12 @@ class TrackerServiceProvider extends PackageServiceProvider
     }
 
     /**
-     *
+     * Boot the service provider.
      */
     public function boot()
     {
         parent::boot();
+
         $this->registerProvider(Providers\RouteServiceProvider::class);
 
         // Publishes
@@ -82,9 +83,4 @@ class TrackerServiceProvider extends PackageServiceProvider
             //
         ];
     }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
 }

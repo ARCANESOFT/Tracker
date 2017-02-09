@@ -2,6 +2,7 @@
 
 use Arcanedev\LaravelTracker\LaravelTrackerServiceProvider;
 use Arcanedev\Support\ServiceProvider;
+use Illuminate\Support\Arr;
 
 /**
  * Class     PackagesServiceProvider
@@ -20,6 +21,8 @@ class PackagesServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        parent::register();
+
         $this->registerLaravelTrackerPackage();
     }
 
@@ -29,6 +32,8 @@ class PackagesServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
+        //
     }
 
     /**
@@ -38,7 +43,9 @@ class PackagesServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return parent::provides();
+        return [
+            //
+        ];
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -52,12 +59,12 @@ class PackagesServiceProvider extends ServiceProvider
     {
         $this->registerProvider(LaravelTrackerServiceProvider::class);
 
-        /** @var \Illuminate\Contracts\Config\Repository  $config */
-        $config = $this->app['config'];
+        $config = $this->config();
+        $items  = $config->get('arcanesoft.tracker');
 
-        $config->set('laravel-tracker.database', $config->get('arcanesoft.tracker.database'));
-        $config->set('laravel-tracker.models',   $config->get('arcanesoft.tracker.models'));
-        $config->set('laravel-tracker.tracking', $config->get('arcanesoft.tracker.tracking'));
-        $config->set('laravel-tracker.routes',   $config->get('arcanesoft.tracker.routes'));
+        $config->set('laravel-tracker.database', Arr::get($items, 'database'));
+        $config->set('laravel-tracker.models',   Arr::get($items, 'models'));
+        $config->set('laravel-tracker.tracking', Arr::get($items, 'tracking'));
+        $config->set('laravel-tracker.routes',   Arr::get($items, 'routes'));
     }
 }
