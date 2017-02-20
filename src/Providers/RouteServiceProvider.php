@@ -11,35 +11,40 @@ use Arcanesoft\Tracker\Http\Routes;
  */
 class RouteServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Properties
+     | -----------------------------------------------------------------
+     */
+    /**
+     * The admin controller namespace for the application.
+     *
+     * @var string
+     */
+    protected $adminNamespace = 'Arcanesoft\\Tracker\\Http\\Controllers\\Admin';
+
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Define the routes for the application.
      */
     public function map()
     {
-        $this->mapAdminRoutes();
+        $this->adminGroup(function () {
+            $this->mapAdminRoutes();
+        });
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Routes
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Register the admin routes.
      */
     private function mapAdminRoutes()
     {
-        $attributes = $this->getAdminAttributes(
-            'tracker.',
-            'Arcanesoft\\Tracker\\Http\\Controllers\\Admin',
-            $this->config()->get('arcanesoft.tracker.route.prefix', 'tracker')
-        );
-
-        $this->group($attributes, function () {
-            Routes\Admin\TrackerRoutes::register();
-        });
+        $this->name('tracker.')
+             ->prefix($this->config()->get('arcanesoft.tracker.route.prefix', 'tracker'))
+             ->group(function () {
+                 Routes\Admin\TrackerRoutes::register();
+             });
     }
 }
