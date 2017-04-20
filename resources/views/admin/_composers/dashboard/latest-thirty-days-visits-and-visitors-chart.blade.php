@@ -1,9 +1,9 @@
 <div class="box">
     <div class="box-header with-border">
-        <h2 class="box-title">Visits</h2>
+        <h2 class="box-title">{{ trans('tracker::visits.titles.visits') }}</h2>
     </div>
     <div class="box-body">
-        <canvas id="visitorsAndVisitsChart" height="250"></canvas>
+        <canvas id="visitors-and-visits-chart" height="250"></canvas>
     </div>
 </div>
 
@@ -11,13 +11,13 @@
     @parent
 
     <script>
-        new Chart($('canvas#visitorsAndVisitsChart'), {
+        new Chart($('canvas#visitors-and-visits-chart'), {
             type: 'line',
             data: {
                 labels: {!! $thirtyDaysRange->values() !!},
                 datasets: [
                     {
-                        label: 'Page Views',
+                        label: "{{ trans('tracker::visits.attributes.page_views') }}",
                         data: {!! $latestVisitsByThirtyDays->values() !!},
                         fill: true,
                         lineTension: 0.1,
@@ -35,7 +35,7 @@
                         spanGaps: false
                     },
                     {
-                        label: 'Unique Visitors',
+                        label: "{{ trans('tracker::visits.attributes.unique_visitors') }}",
                         data: {!! $latestVisitorsByThirtyDays->values() !!},
                         fill: true,
                         lineTension: 0.1,

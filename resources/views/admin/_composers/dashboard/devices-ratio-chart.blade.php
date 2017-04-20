@@ -1,9 +1,9 @@
 <div class="box">
     <div class="box-header with-border">
-        <h2 class="box-title">Devices</h2>
+        <h2 class="box-title">{{ trans('tracker::devices.titles.devices') }}</h2>
     </div>
     <div class="box-body">
-        <canvas id="devicesRatioChart" height="200"></canvas>
+        <canvas id="devices-ratio-chart" height="200"></canvas>
     </div>
 </div>
 
@@ -11,7 +11,7 @@
     @parent
 
     <script>
-        new Chart($('canvas#devicesRatioChart'), {
+        new Chart($('canvas#devices-ratio-chart'), {
             type: 'pie',
             data: {
                 labels: {!! $devicesRatio->pluck('kind') !!},

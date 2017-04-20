@@ -10,10 +10,11 @@ use Arcanesoft\Tracker\Models\Visitor;
  */
 class VisitorsController extends Controller
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * VisitorsController constructor.
      */
@@ -21,20 +22,22 @@ class VisitorsController extends Controller
     {
         parent::__construct();
 
-        $this->addBreadcrumbRoute('Visitors', 'admin::tracker.visitors.index');
         $this->setCurrentPage('tracker-visitors');
+        $this->addBreadcrumbRoute(trans('tracker::visitors.titles.visitors'), 'admin::tracker.visitors.index');
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function index()
     {
-        $this->setTitle('Visitors list - Tracker');
-
         $visitors = Visitor::with(['user', 'device', 'agent', 'geoip', 'referer', 'cookie', 'language', 'activities'])
             ->paginate(50);
+
+        $this->setTitle($title = trans('tracker::visitors.titles.visitors-list'));
+        $this->addBreadcrumb($title);
 
         return $this->view('admin.visitors.index', compact('visitors'));
     }

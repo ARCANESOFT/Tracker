@@ -1,15 +1,15 @@
 <div class="box">
     <div class="box-header with-border">
-        <h2 class="box-title">Languages</h2>
+        <h2 class="box-title">{{ trans('tracker::languages.titles.languages') }}</h2>
     </div>
     <div class="box-body no-padding">
         <div class="table-responsive">
             <table class="table table-condensed table-hover no-margin">
                 <thead>
                     <tr>
-                        <th>Language</th>
-                        <th class="text-center" style="width: 100px;">Count</th>
-                        <th>Percentage</th>
+                        <th>{{ trans('tracker::languages.attributes.language') }}</th>
+                        <th class="text-center" style="width: 100px;">{{ trans('tracker::generals.count') }}</th>
+                        <th>{{ trans('tracker::generals.percentage') }}</th>
                     </tr>
                 </thead>
                 <tbody>

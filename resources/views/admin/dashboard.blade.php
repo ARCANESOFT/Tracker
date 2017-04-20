@@ -1,5 +1,5 @@
 @section('header')
-    <h1>Tracker</h1>
+    <h1><i class="fa fa-fw fa-bar-chart"></i> {{ trans('tracker::dashboard.titles.statistics') }} <small></small></h1>
 @endsection
 
 @section('content')

@@ -1,9 +1,9 @@
 <div class="box">
     <div class="box-header with-border">
-        <h2 class="box-title">Operating System</h2>
+        <h2 class="box-title">{{ trans('tracker::devices.titles.operating-system') }}</h2>
     </div>
     <div class="box-body">
-        <canvas id="operatingSystemRatioChart" height="200"></canvas>
+        <canvas id="operating-system-ratio-chart" height="200"></canvas>
     </div>
 </div>
 
@@ -11,7 +11,7 @@
     @parent
 
     <script>
-        new Chart($('canvas#operatingSystemRatioChart'), {
+        new Chart($('canvas#operating-system-ratio-chart'), {
             type: 'pie',
             data: {
                 labels: {!! $operatingSystemRatio->pluck('platform') !!},

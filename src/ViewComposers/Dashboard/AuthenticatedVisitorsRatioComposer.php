@@ -12,16 +12,18 @@ use Illuminate\Contracts\View\View;
  */
 class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constants
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     const VIEW = 'tracker::admin._composers.dashboard.authenticated-visitors-ratio-chart';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Compose the view.
      *
@@ -41,10 +43,11 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
         ));
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get the authenticated visitors ratio.
      *
@@ -65,7 +68,7 @@ class AuthenticatedVisitorsRatioComposer extends AbstractViewComposer
 
         return collect($ratio)->transform(function ($count, $key) {
             return [
-                'name'  => trans("tracker::users.$key"),
+                'name'  => trans("tracker::visitors.$key"),
                 'count' => $count,
             ];
         });

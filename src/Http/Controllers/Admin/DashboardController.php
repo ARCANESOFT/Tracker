@@ -10,10 +10,11 @@ use Arcanedev\LaravelTracker\Models\VisitorActivity;
  */
 class DashboardController extends Controller
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * DashboardController constructor.
      */
@@ -22,17 +23,19 @@ class DashboardController extends Controller
         parent::__construct();
 
         $this->setCurrentPage('tracker-dashboard');
+        $this->addBreadcrumbRoute(trans('tracker::dashboard.titles.statistics'), 'admin::tracker.stats.index');
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function index()
     {
-        $this->setTitle('Tracker');
-
         $activities = VisitorActivity::all()->toArray();
+
+        $this->setTitle(trans('tracker::dashboard.titles.statistics'));
 
         return $this->view('admin.dashboard', compact('activities'));
     }

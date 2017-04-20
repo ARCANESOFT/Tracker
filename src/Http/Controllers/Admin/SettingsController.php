@@ -10,10 +10,11 @@ use Illuminate\Support\Arr;
  */
 class SettingsController extends Controller
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * SettingsController constructor.
      */
@@ -21,22 +22,22 @@ class SettingsController extends Controller
     {
         parent::__construct();
 
-        $this->addBreadcrumbRoute('Settings', 'admin::tracker.settings.index');
         $this->setCurrentPage('tracker-settings');
+        $this->addBreadcrumbRoute(trans('tracker::settings.titles.settings'), 'admin::tracker.settings.index');
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function index()
     {
-        $this->setTitle('Settings - Tracker');
+        $configs  = config('arcanesoft.tracker', []);
+        $trackers = Arr::get($configs, 'tracking', []);
 
-        $configs = config('arcanesoft.tracker', []);
+//        $this->setTitle('Settings - Tracker');
 
-        return $this->view('admin.settings.index', [
-            'trackers' => Arr::get($configs, 'tracking', []),
-        ]);
+        return $this->view('admin.settings.index', compact('trackers'));
     }
 }

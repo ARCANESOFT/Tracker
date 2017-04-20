@@ -1,9 +1,9 @@
 <div class="box">
     <div class="box-header with-border">
-        <h2 class="box-title">Authenticated Visitors</h2>
+        <h2 class="box-title">{{ trans('tracker::visitors.titles.authenticated-visitors') }}</h2>
     </div>
     <div class="box-body">
-        <canvas id="authenticatedVisitorsChart" height="200"></canvas>
+        <canvas id="authenticated-visitors-chart" height="200"></canvas>
     </div>
 </div>
 
@@ -11,7 +11,7 @@
     @parent
 
     <script>
-        new Chart($('canvas#authenticatedVisitorsChart'), {
+        new Chart($('canvas#authenticated-visitors-chart'), {
             type: 'pie',
             data: {
                 labels: {!! $authenticatedVisitorsRatio->pluck('name') !!},

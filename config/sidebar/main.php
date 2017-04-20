@@ -3,14 +3,14 @@
 use Arcanesoft\Auth\Models\Role;
 
 return [
-    'title'       => 'Tracker',
+    'title'       => 'tracker::sidebar.tracker',
     'name'        => 'tracker',
     'icon'        => 'fa fa-fw fa-binoculars',
     'roles'       => [Role::ADMINISTRATOR],
     'permissions' => [],
     'children'    => [
         [
-            'title'       => 'Statistics',
+            'title'       => 'tracker::sidebar.statistics',
             'name'        => 'tracker-dashboard',
             'route'       => 'admin::tracker.stats.index',
             'icon'        => 'fa fa-fw fa-bar-chart',
@@ -20,7 +20,7 @@ return [
             ],
         ],
         [
-            'title'       => 'Visitors',
+            'title'       => 'tracker::sidebar.visitors',
             'name'        => 'tracker-visitors',
             'route'       => 'admin::tracker.visitors.index',
             'icon'        => 'fa fa-fw fa-users',
@@ -30,10 +30,10 @@ return [
             ],
         ],
         [
-            'title'       => 'Settings',
+            'title'       => 'tracker::sidebar.settings',
             'name'        => 'tracker-settings',
             'route'       => 'admin::tracker.settings.index',
-            'icon'        => 'fa fa-fw fa-cogs',
+            'icon'        => 'fa fa-fw fa-cog',
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [
                 //

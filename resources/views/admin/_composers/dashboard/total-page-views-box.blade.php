@@ -3,7 +3,7 @@
         <i class="ion ion-ios-eye-outline"></i>
     </span>
     <div class="info-box-content">
-        <span class="info-box-text">Total Page Views</span>
+        <span class="info-box-text">{{ trans('tracker::dashboard.titles.total-page-views') }}</span>
         <span class="info-box-number">{{ $pageViewsCount }}</span>
     </div>
 </div>

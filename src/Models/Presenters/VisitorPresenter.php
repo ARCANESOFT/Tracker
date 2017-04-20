@@ -11,10 +11,11 @@
  */
 trait VisitorPresenter
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Accessors
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get the `username` attribute.
      *
@@ -22,7 +23,7 @@ trait VisitorPresenter
      */
     public function getUsernameAttribute()
     {
-        return $this->hasUser() ? $this->user->full_name : trans('tracker::users.guest');
+        return $this->hasUser() ? $this->user->full_name : trans('tracker::visitors.guest');
     }
 
     /**
