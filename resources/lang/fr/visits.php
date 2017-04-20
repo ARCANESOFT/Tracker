@@ -8,7 +8,8 @@ return [
      */
 
     'attributes' => [
-        'domain' => 'Domaine',
+        'page_views'      => 'Pages vues',
+        'unique_visitors' => 'Visiteurs uniques',
     ],
 
     /* -----------------------------------------------------------------
@@ -17,14 +18,7 @@ return [
      */
 
     'titles' => [
-        'referers' => 'Référents',
+        'visits' => 'Visites',
     ],
-
-    /* -----------------------------------------------------------------
-     |  Messages
-     | -----------------------------------------------------------------
-     */
-
-    'list-empty' => 'La liste des référents est vide !',
 
 ];

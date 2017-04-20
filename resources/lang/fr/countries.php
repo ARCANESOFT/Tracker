@@ -8,7 +8,9 @@ return [
      */
 
     'attributes' => [
-        'domain' => 'Domaine',
+        'flag' => 'Drapeau',
+        'code' => 'Code',
+        'name' => 'Nom',
     ],
 
     /* -----------------------------------------------------------------
@@ -17,7 +19,7 @@ return [
      */
 
     'titles' => [
-        'referers' => 'Référents',
+        'countries' => 'Pays',
     ],
 
     /* -----------------------------------------------------------------
@@ -25,6 +27,6 @@ return [
      | -----------------------------------------------------------------
      */
 
-    'list-empty' => 'La liste des référents est vide !',
+    'list-empty' => 'La liste des pays est vide !',
 
 ];

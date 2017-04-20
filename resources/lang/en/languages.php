@@ -8,7 +8,7 @@ return [
      */
 
     'attributes' => [
-        'domain' => 'Domaine',
+        'language' => 'Language',
     ],
 
     /* -----------------------------------------------------------------
@@ -17,14 +17,7 @@ return [
      */
 
     'titles' => [
-        'referers' => 'Référents',
+        'languages' => 'Languages',
     ],
-
-    /* -----------------------------------------------------------------
-     |  Messages
-     | -----------------------------------------------------------------
-     */
-
-    'list-empty' => 'La liste des référents est vide !',
 
 ];
