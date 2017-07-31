@@ -40,6 +40,7 @@ class TrackerServiceProvider extends PackageServiceProvider
             Providers\PackagesServiceProvider::class,
             Providers\AuthorizationServiceProvider::class,
             Providers\ComposerServiceProvider::class,
+            Providers\RouteServiceProvider::class,
         ]);
         $this->registerConsoleServiceProvider(Providers\CommandServiceProvider::class);
     }
@@ -50,8 +51,6 @@ class TrackerServiceProvider extends PackageServiceProvider
     public function boot()
     {
         parent::boot();
-
-        $this->registerProvider(Providers\RouteServiceProvider::class);
 
         // Publishes
         $this->publishConfig();
