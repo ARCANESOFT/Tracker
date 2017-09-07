@@ -33,10 +33,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $activities = VisitorActivity::all()->toArray();
-
         $this->setTitle(trans('tracker::dashboard.titles.statistics'));
 
-        return $this->view('admin.dashboard', compact('activities'));
+        return $this->view('admin.dashboard', [
+            'activities' => VisitorActivity::all()->toArray(),
+        ]);
     }
 }

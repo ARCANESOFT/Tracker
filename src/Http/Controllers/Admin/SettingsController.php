@@ -33,8 +33,7 @@ class SettingsController extends Controller
 
     public function index()
     {
-        $configs  = config('arcanesoft.tracker', []);
-        $trackers = Arr::get($configs, 'tracking', []);
+        $trackers = Arr::get(config('arcanesoft.tracker', []), 'tracking', []);
 
 //        $this->setTitle('Settings - Tracker');
 
